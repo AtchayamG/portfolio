@@ -37,9 +37,10 @@ export default function Nav() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${scrolled ? 'py-2' : 'py-4'}`}>
       <nav aria-label="Main navigation" className={`mx-auto flex max-w-6xl items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500 ${scrolled ? 'glass mx-4 sm:mx-auto' : ''}`}>
-        <button onClick={() => go('hero')} className="flex items-center gap-2 font-display text-lg font-bold text-white" aria-label="Back to top">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-electric to-cyan font-display text-sm font-bold text-void">A</span>
-          <span className="hidden sm:inline">{identity.shortName}<span className="text-cyan">.</span></span>
+        <button onClick={() => go('hero')} className="flex items-center" aria-label="Atchayam G. — back to top">
+          <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-cyan/30 bg-white/5 font-display text-base font-extrabold tracking-tight shadow-glow">
+            <span className="text-cyan">A</span><span className="text-violet">G</span>
+          </span>
         </button>
 
         <ul className="hidden items-center gap-1 lg:flex">

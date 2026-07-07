@@ -303,7 +303,7 @@ export const aiWorkflow = {
 export const achievements = [
   { title: '6+ Apps Live on Stores', text: 'Banking, payments and enterprise apps published to Google Play and the Apple App Store — trusted with real money daily.' },
   { title: 'NPCI Security Compliance', text: 'Led UPI apps through NPCI security audits — certificate pinning, server-side verification, secure storage.' },
-  { title: 'Team of 10 Engineers', text: 'Built and led a cross-functional mobile team; hiring drives doubled team size and release cadence.' },
+  { title: 'Team of 10+ Engineers', text: 'Built and led a cross-functional mobile team; hiring drives doubled team size and release cadence.' },
   { title: '365+ Automated Tests', text: 'MAAIDO ships with 365+ automated tests across its Flutter app and FastAPI backend.' },
 ];
 
