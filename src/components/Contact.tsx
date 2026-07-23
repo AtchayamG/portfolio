@@ -5,16 +5,6 @@ export default function Contact() {
   const ref = useReveal<HTMLElement>();
   return (
     <section id="contact" ref={ref} className="relative z-10 overflow-hidden py-28 sm:py-40">
-      {/* Higgsfield-generated digital-city backdrop */}
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <img
-          src={`${import.meta.env.BASE_URL}assets/city-backdrop.webp`}
-          alt=""
-          className="h-full w-full object-cover opacity-30"
-          loading="lazy"
-        />
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, #04050a 0%, rgba(4,5,10,0.55) 45%, #04050a 100%)' }} />
-      </div>
       <div className="section-shell">
         <div className="glass relative overflow-hidden p-8 text-center sm:p-14" data-reveal>
           <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-[36rem] -translate-x-1/2 rounded-full bg-gradient-to-r from-electric/25 via-cyan/25 to-violet/25 blur-3xl" aria-hidden="true" />

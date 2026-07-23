@@ -347,11 +347,61 @@ function HoloCore() {
 }
 
 /* ══════════════════════════════════════════════════
+   Sky craft — flying vehicles drifting across the skyline
+══════════════════════════════════════════════════ */
+function SkyCraft({ count }: { count: number }) {
+  const glow = useRadialTexture('rgba(180,230,255,1)');
+  const group = useRef<THREE.Group>(null);
+  const data = useMemo(() => {
+    const colors = ['#22d3ee', '#8b5cf6', '#7dd3fc', '#c4b5fd'];
+    return Array.from({ length: count }, (_, i) => ({
+      y: 5 + Math.random() * 9,
+      z: -18 - Math.random() * 42,
+      dir: Math.random() < 0.5 ? 1 : -1,
+      speed: 1.6 + Math.random() * 2.2,
+      offset: Math.random() * 110,
+      scale: 0.6 + Math.random() * 0.8,
+      color: colors[i % colors.length],
+    }));
+  }, [count]);
+
+  useFrame(({ clock }) => {
+    if (!group.current) return;
+    const t = clock.elapsedTime;
+    const boost = 1 + scrollState.smooth * 1.2;
+    const span = 110;
+    group.current.children.forEach((child, i) => {
+      const d = data[i];
+      let x = (d.offset + t * d.speed * boost) % span;
+      if (x < 0) x += span;
+      child.position.set(d.dir > 0 ? x - span / 2 : span / 2 - x, d.y + Math.sin(t * 0.5 + i) * 0.25, d.z);
+    });
+  });
+
+  if (!glow) return null;
+  return (
+    <group ref={group}>
+      {data.map((d, i) => (
+        <group key={i}>
+          <sprite scale={[3.2 * d.scale, 0.16 * d.scale, 1]} position={[-d.dir * 0.9 * d.scale, 0, 0]}>
+            <spriteMaterial map={glow} color={d.color} transparent opacity={0.35} depthWrite={false} blending={THREE.AdditiveBlending} />
+          </sprite>
+          <sprite scale={[0.5 * d.scale, 0.5 * d.scale, 1]}>
+            <spriteMaterial map={glow} color="#eaf6ff" transparent opacity={0.9} depthWrite={false} blending={THREE.AdditiveBlending} />
+          </sprite>
+        </group>
+      ))}
+    </group>
+  );
+}
+
+/* ══════════════════════════════════════════════════
    Scene root
 ══════════════════════════════════════════════════ */
 export default function Scene({ reducedMotion, isMobile }: { reducedMotion: boolean; isMobile: boolean }) {
   const particleCount = isMobile ? 380 : 1000;
   const fogCount = isMobile ? 10 : 20;
+  const craftCount = reducedMotion ? 0 : isMobile ? 3 : 6;
 
   return (
     <div className="fixed inset-0 z-0" aria-hidden="true">
@@ -368,6 +418,7 @@ export default function Scene({ reducedMotion, isMobile }: { reducedMotion: bool
         <CameraRig reducedMotion={reducedMotion} />
         <CityLayers />
         <FogField count={fogCount} />
+        <SkyCraft count={craftCount} />
         <Particles count={particleCount} />
         <HoloCore />
 
